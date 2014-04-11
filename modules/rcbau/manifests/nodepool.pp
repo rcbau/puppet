@@ -55,8 +55,8 @@ class rcbau::nodepool(
     ensure  => present,
     owner   => 'root',
     group   => 'root',
-    mode    => '0750',
+    mode    => '0755',
     content => template('rcbau/nodepool/prepare_node_turbo_hipster.sh.erb'),
-    require => File('/etc/nodepool/scripts'),
+    require => File['/etc/nodepool/scripts'],
   }
 }
