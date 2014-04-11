@@ -1,0 +1,75 @@
+script-dir: /etc/nodepool/scripts
+dburi: 'mysql://nodepool:<%= @mysql_password %>@localhost/nodepool'
+
+cron:
+  cleanup: '*/1 * * * *'
+  check: '*/15 * * * *'
+  update-image: '14 2 * * *'
+
+#zmq-publishers:
+#  - turbo-hipster
+
+gearman-servers:
+  - host: 119.9.42.224
+
+providers:
+  - name: rax-syd
+    region-name: 'SYD'
+    service-type: 'compute'
+    service-name: 'cloudServersOpenStack'
+    username: '<%= @rackspace_username %>'
+    password: '<%= @rackspace_password %>'
+    project-id: '<%= @rackspace_project %>'
+    auth-url: 'https://identity.api.rackspacecloud.com/v2.0/'
+    boot-timeout: 220
+    max-servers: 3
+    rate: 0.001
+    networks:
+      - net-id: 354ba18d-8634-4f56-b5f7-5966ad4b4df9
+      - net-id: 00000000-0000-0000-0000-000000000000
+    images:
+      - name: th-mysql
+        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
+        min-ram: 8192
+        setup: prepare_node_turbo_hipster.sh
+        username: nodepool
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: th-percona
+        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
+        min-ram: 8192
+        setup: prepare_node_turbo_hipster.sh
+        username: nodepool
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: th-cookbooks
+        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
+        min-ram: 8192
+        setup: prepare_node_turbo_hipster.sh
+        username: nodepool
+        private-key: /home/nodepool/.ssh/id_rsa
+
+labels:
+  - name: th-mysql
+    image: th-mysql
+    min-ready: 1
+    ready-script: start_TH_service.sh
+    ghost-name: turbo-hipster
+    providers:
+      - name: rax-syd
+  - name: th-percona
+    image: th-percona
+    min-ready: 1
+    ready-script: start_TH_service.sh
+    ghost-name: turbo-hipster
+    providers:
+      - name: rax-syd
+  - name: th-cookbooks
+    image: th-cookbooks
+    min-ready: 1
+    ready-script: start_TH_service.sh
+    ghost-name: turbo-hipster
+    providers:
+      - name: rax-syd
+
+targets:
+  - name: turbo-hipster
+    ghost-target: true

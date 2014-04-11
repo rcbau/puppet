@@ -1,0 +1,42 @@
+#!/bin/bash -xe
+
+# Copyright (C) 2011-2013 OpenStack Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+# implied.
+#
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+sudo DEBIAN_FRONTEND=noninteractive apt-get \
+   --option "Dpkg::Options::=--force-confold" \
+   --assume-yes update
+
+# First we need to install puppet.
+sudo DEBIAN_FRONTEND=noninteractive apt-get \
+   --option "Dpkg::Options::=--force-confold" \
+   --assume-yes install git
+
+mkdir -p /opt
+cd /opt
+
+git clone --depth 1 git://github.com/openstack-infra/config.git
+cd config
+
+sudo ./install_puppet.sh
+
+if [ $(grep -c puppet-master /etc/hosts) -eq 0 ]
+then
+    sudo su -c "echo '<%= @puppetmaster %> puppet-master' >> /etc/hosts"
+fi
+sudo puppet agent --waitforcert 60 --server puppet-master --no-daemonize --onetime --verbose --show_diff --no-splay
+sleep 5
+sudo puppet agent --waitforcert 60 --server puppet-master --no-daemonize --onetime --verbose --show_diff --no-splay
