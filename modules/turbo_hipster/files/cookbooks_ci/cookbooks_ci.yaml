@@ -1,0 +1,4 @@
+plugins:
+    - name: shell_script
+      shell_script: /etc/turbo-hipster/scripts/cookbooks_ci.sh
+      function: build:cookbook_ci

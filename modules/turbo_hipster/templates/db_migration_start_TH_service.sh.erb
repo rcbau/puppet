@@ -1,0 +1,46 @@
+#!/bin/bash
+# ==================================================
+# = This file is managed by puppet, modifications  =
+# = to it will not be persistent.                  =
+# ==================================================
+
+dataset_host="<%= @dataset_host %>"
+dataset_path="<%= @dataset_path %>"
+dataset_user="<%= @dataset_user %>"
+th_user="<%= @th_user %>"
+
+# Create a network namespace with no network access
+if [ ! -e '/var/run/netns/nonet' ]
+then
+  sudo ip netns add nonet
+  sudo ip link add veth0 type veth peer name veth1
+  sudo ifconfig veth0 172.16.0.1/24 up
+  sudo ip link set veth1 netns nonet
+  sudo ip netns exec nonet ifconfig veth1 172.16.0.2/24 up
+fi
+
+# Firewall mysql connections from outside
+if [ $(sudo /sbin/iptables-save |grep -ic "TH_CHAIN") -gt 0 ]
+then
+  sudo /sbin/iptables -F TH_CHAIN
+  sudo /sbin/iptables -D INPUT -j TH_CHAIN
+  sudo /sbin/iptables -X TH_CHAIN
+fi
+
+sudo /sbin/iptables -N TH_CHAIN
+sudo /sbin/iptables -I INPUT -j TH_CHAIN
+sudo /sbin/iptables -A TH_CHAIN -p tcp --dport 3306 ! -d 172.16.0.1 -j DROP
+sudo /sbin/iptables -A TH_CHAIN -p tcp --dport 3306 ! -d 172.16.0.1 -j DROP
+
+# Sync the datasets
+# <todo> rsync -pa $dataset_username@$dataset_source $dataset_dest 
+sudo su - -c "rsync -a $dataset_user@$dataset_host:$dataset_path /var/lib/turbo-hipster/" $th_user
+chown $th_user:$th_user -R /var/lib/turbo-hipster/
+
+# start up turbo-hipster. 
+if [ $(ps -eaf |grep -ci "\/[t]urbo-hipster ") -gt 0 ]
+then
+  /etc/init.d/turbo-hipster restart
+else
+  /etc/init.d/turbo-hipster start
+fi

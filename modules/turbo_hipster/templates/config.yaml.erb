@@ -1,0 +1,23 @@
+zuul_server:
+        git_url: http://<%= @zuul_server %>/p/
+        gearman_host: <%= @zuul_server %>
+        gearman_port: <%= @zuul_port %>
+
+debug_log: /var/log/turbo-hipster/debug.log
+jobs_working_dir: /var/lib/turbo-hipster/jobs
+git_working_dir: /var/lib/turbo-hipster/git
+pip_download_cache: /var/cache/pip
+baseline_command: "baseline.sh %s"
+flavor: rackspace_standard_2cpu_2gb
+
+publish_logs:
+        type: swift
+        authurl: https://identity.api.rackspacecloud.com/v2.0/
+        tenant: " "
+        user: <%= @rs_cloud_user %>
+        password: <%= @rs_cloud_pass %>
+        container: blah_turbo_hipster_results
+        region: XYZ
+        prepend_url: http://www.rcbops.com/turbo_hipster/results/
+
+conf_d: /etc/turbo-hipster/conf.d/

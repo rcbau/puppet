@@ -1,0 +1,24 @@
+plugins:
+    - name: gate_real_db_upgrade
+      datasets_dir: /var/lib/turbo-hipster/datasets_devstack_131007
+      function: build:gate-real-db-upgrade_nova_<%= @database_engine %>_devstack_131007
+
+    - name: gate_real_db_upgrade
+      datasets_dir: /var/lib/turbo-hipster/datasets_devstack_150
+      function: build:gate-real-db-upgrade_nova_<%= @database_engine %>_devstack_150
+
+    - name: gate_real_db_upgrade
+      datasets_dir: /var/lib/turbo-hipster/datasets_trivial_500
+      function: build:gate-real-db-upgrade_nova_<%= @database_engine %>_trivial_500
+
+    - name: gate_real_db_upgrade
+      datasets_dir: /var/lib/turbo-hipster/datasets_trivial_6000
+      function: build:gate-real-db-upgrade_nova_<%= @database_engine %>_trivial_6000
+
+    - name: gate_real_db_upgrade
+      datasets_dir: /var/lib/turbo-hipster/datasets_user_001
+      function: build:gate-real-db-upgrade_nova_<%= @database_engine %>_user_001
+
+    - name: gate_real_db_upgrade
+      datasets_dir: /var/lib/turbo-hipster/datasets_user_002
+      function: build:gate-real-db-upgrade_nova_<%= @database_engine %>_user_002
