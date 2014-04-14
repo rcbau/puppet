@@ -9,7 +9,7 @@ class rcbau::zuul(
   $zuul_url = '',
   $sysadmins = [],
   $statsd_host = '',
-#  $gearman_workers = [],
+  $gearman_workers = [],
   $replication_targets = [],
   $status_url = 'http://status.rcbops.com/zuul/',
 ) {
