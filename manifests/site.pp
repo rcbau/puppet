@@ -12,6 +12,17 @@ node 'nodepool.rcbops.com' {
   }
 }
 
+node 'zuul.rcbops.com' {
+  class { 'rcbau::zuul':
+    gerrit_server        => 'review.openstack.org',
+    gerrit_user          => 'turbo-hipster',
+    zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents'),
+#    url_pattern          => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
+    zuul_url             => 'http://zuul.rcbops.com/p',
+#    statsd_host          => 'graphite.openstack.org',
+  }
+}
+
 node /th-mysql-\d+\.template\.openstack\.org$/ {
   class { 'openstack_project::turbo_hipster':
     mysql_root_password => hiera('nodepool_mysql_root_password'),
