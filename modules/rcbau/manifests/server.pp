@@ -26,5 +26,7 @@ class rcbau::server (
     User::Virtual::Localuser['rcbau'],
     User::Virtual::Localuser['mattoliverau'],
   )
+
+  include motd_tail
 }
 
