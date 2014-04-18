@@ -54,4 +54,9 @@ class rcbau::zuul(
     source => 'puppet:///modules/rcbau/zuul/gearman-logging.conf',
     notify => Exec['zuul-reload'],
   }
+
+  # Start both the server and the merger
+  class { '::zuul::server': }
+  class { '::zuul::merger': }
+
 }
