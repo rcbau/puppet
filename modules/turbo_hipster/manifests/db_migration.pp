@@ -18,7 +18,6 @@ class turbo_hipster::db_migration (
   $mariadb_version = '5.5'
 
 ) {
-  
   define database_engine_repo {
     if $database_engine == 'percona' {
       apt::source { 'percona':
@@ -52,7 +51,7 @@ class turbo_hipster::db_migration (
 
   include mysql::python
 
-  # first create the TH Test database user. 
+  # first create the TH Test database user.
   database_user { "${th_test_user}@${th_test_host}":
     ensure        => $ensure,
     password_hash => mysql_password($th_test_pass),
@@ -60,7 +59,7 @@ class turbo_hipster::db_migration (
     require       => Class['mysql::server'],
   }
 
-  # define th_database so we can use an array to define all TH databases. 
+  # define th_database so we can use an array to define all TH databases.
   define th_database {
     database { "$title":
       ensure   => $ensure,
@@ -68,7 +67,7 @@ class turbo_hipster::db_migration (
       provider => 'mysql',
       require  => Class['mysql::server'],
     }
-    
+
     if $ensure == 'present' {
       database_grant { "${th_test_user}@${th_test_host}/${title}":
         privileges => $grant,
@@ -77,7 +76,7 @@ class turbo_hipster::db_migration (
       }
     }
   }
-  th_database { $th_databases: 
+  th_database { $th_databases:
     require =>  Database_user["${th_test_user}@${th_test_host}"],
   }
 

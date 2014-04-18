@@ -16,7 +16,7 @@ class turbo_hipster (
 ) {
 
   include pip
-  
+
   user { "$th_user":
     ensure     => present,
     home       => "/home/$th_user",
@@ -55,7 +55,7 @@ class turbo_hipster (
   }
 
 #  pip_conf {  ['/root/', "/home/$th_user/"]:
-#    require => User["$th_user"], 
+#    require => User["$th_user"],
 #  }
 
   file { '/var/cache/pip':
@@ -104,7 +104,7 @@ class turbo_hipster (
     }
   }
 
-# This config in the future will need to be split config.json and config.json.d/ so each plugin can contain place each piece of their configuration. 
+# This config in the future will need to be split config.json and config.json.d/ so each plugin can contain place each piece of their configuration.
   file { '/etc/turbo-hipster/config.yaml':
     ensure  => present,
     mode    => '0644',
@@ -158,7 +158,7 @@ class turbo_hipster (
     cwd       => "$th_repo_destination",
     path      => '/usr/local/bin:/usr/bin:/bin/',
 #    subscribe => Vcsrepo["$th_repo_destination"],
-    require   => [ 
+    require   => [
       Vcsrepo["$th_repo_destination"],
       Exec['install_th_dependencies'],
     ],
@@ -207,7 +207,7 @@ class turbo_hipster (
 #    command => '/etc/turbo-hipster/start_turbo-hipster.sh',
 #    user    => 'root',
 #    special => 'reboot',
-#    require => File['/etc/turbo-hipster/start_turbo-hipster.sh'], 
+#    require => File['/etc/turbo-hipster/start_turbo-hipster.sh'],
 #  }
 
   exec { 'Start Turbo-Hipster at boot (rc.local)':

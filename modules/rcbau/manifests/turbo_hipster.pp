@@ -14,7 +14,7 @@ class rcbau::turbo_hipster (
     "nova_dataset_trivial_500",
     "nova_dataset_trivial_6000",
     "nova_datasets_user_001",
-    "nova_dataset_user_002",   
+    "nova_dataset_user_002",
   ],
   $zuul_server = "",
   $zuul_port = 4730,
@@ -52,7 +52,7 @@ class rcbau::turbo_hipster (
     manage_start_script      => $manage_start_script,
   }
 
-  if ($plugin == "db_migration") { 
+  if ($plugin == "db_migration") {
     class { '::turbo_hipster::db_migration':
       th_dataset_path         => $th_dataset_path,
       th_test_user            => $th_test_user,

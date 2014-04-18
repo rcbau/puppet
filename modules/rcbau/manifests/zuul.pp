@@ -18,7 +18,7 @@ class rcbau::zuul(
 
   class { 'rcbau::server':
     iptables_public_tcp_ports => [80, 4730],
-#    iptables_rules6           => $iptables_rules,  # This will need to be locked down. 
+#    iptables_rules6           => $iptables_rules,  # This will need to be locked down.
 #    iptables_rules4           => $iptables_rules,
     sysadmins                 => $sysadmins,
   }

@@ -33,11 +33,11 @@ sudo /sbin/iptables -A TH_CHAIN -p tcp --dport 3306 ! -d 172.16.0.1 -j DROP
 sudo /sbin/iptables -A TH_CHAIN -p tcp --dport 3306 ! -d 172.16.0.1 -j DROP
 
 # Sync the datasets
-# <todo> rsync -pa $dataset_username@$dataset_source $dataset_dest 
+# <todo> rsync -pa $dataset_username@$dataset_source $dataset_dest
 sudo su - -c "rsync -a $dataset_user@$dataset_host:$dataset_path /var/lib/turbo-hipster/" $th_user
 chown $th_user:$th_user -R /var/lib/turbo-hipster/
 
-# start up turbo-hipster. 
+# start up turbo-hipster.
 if [ $(ps -eaf |grep -ci "\/[t]urbo-hipster ") -gt 0 ]
 then
   /etc/init.d/turbo-hipster restart
