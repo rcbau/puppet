@@ -2,7 +2,6 @@
 #
 class turbo_hipster::db_migration (
   $th_dataset_path = "/var/lib/turbo-hipster/",
-  $th_local_dataset_path = "/etc/ansible/roles/turbo-hipster/datasets/",
   $th_user = $turbo_hipster::th_user,
   $th_test_user = "nova",
   $th_test_pass = "tester",

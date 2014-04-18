@@ -5,7 +5,6 @@ class turbo_hipster (
   $th_repo_destination = '/opt/turbo-hipster',
   $th_repo_branch = "master",
   $th_dataset_path = "/var/lib/turbo-hipster/",
-  $th_local_dataset_path = "/etc/ansible/roles/turbo-hipster/datasets/",
   $th_user = "th",
   $zuul_server = "",
   $zuul_port = 1234,
