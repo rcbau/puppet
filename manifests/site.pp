@@ -12,7 +12,7 @@ node 'nodepool.rcbops.com' {
   }
 }
 
-node 'zuul.rcbops.com' {
+node 'zuul-test.rcbops.com' {
   class { 'rcbau::zuul':
     gerrit_server        => 'review.openstack.org',
     gerrit_user          => 'turbo-hipster',
@@ -22,11 +22,11 @@ node 'zuul.rcbops.com' {
 }
 
 node /th-mysql-\d+\.template\.openstack\.org$/ {
-  class { 'openstack_project::turbo_hipster':
+  class { 'rcbau::turbo_hipster':
     mysql_root_password => hiera('nodepool_mysql_root_password'),
     rs_cloud_user       => hiera("th_rackspace_user"),
     rs_cloud_pass       => hiera("th_rackspace_pass"),
-    zuul_server         => "zuultest-1204.rcbops.com",
+    zuul_server         => hiera("zuul_server"),
     zuul_port           => 4730,
     ssh_private_key     => hiera("th_private_ssh_key"),
     dataset_host        => hiera("th_dataset_host"),
@@ -42,13 +42,13 @@ node /th-mysql-\d+\.template\.openstack\.org$/ {
 
 
 node /th-percona-\d+\.template\.openstack\.org$/ {
-  class { 'openstack_project::turbo_hipster':
+  class { 'rcbau::turbo_hipster':
     mysql_root_password      => hiera('nodepool_mysql_root_password'),
     database_engine_package  => "percona-server-server",
     database_engine          => "percona",
     rs_cloud_user            => hiera("th_rackspace_user"),
     rs_cloud_pass            => hiera("th_rackspace_pass"),
-    zuul_server              => "zuultest-1204.rcbops.com",
+    zuul_server              => hiera("zuul_server"),
     zuul_port                => 4730,
     ssh_private_key          => hiera("th_private_ssh_key"),
     dataset_host             => hiera("th_dataset_host"),
@@ -63,13 +63,13 @@ node /th-percona-\d+\.template\.openstack\.org$/ {
 }
 
 node /th-maria-\d+\.template\.openstack\.org$/ {
-  class { 'openstack_project::turbo_hipster':
+  class { 'rcbau::turbo_hipster':
     mysql_root_password      => hiera('nodepool_mysql_root_password'),
     database_engine_package  => "mariadb-server",
     database_engine          => "mariadb",
     rs_cloud_user            => hiera("th_rackspace_user"),
     rs_cloud_pass            => hiera("th_rackspace_pass"),
-    zuul_server              => "zuultest-1204.rcbops.com",
+    zuul_server              => hiera("zuul_server"),
     zuul_port                => 4730,
     ssh_private_key          => hiera("th_private_ssh_key"),
     dataset_host             => hiera("th_dataset_host"),
@@ -84,10 +84,10 @@ node /th-maria-\d+\.template\.openstack\.org$/ {
 }
 
 node /th-cookbooks-\d+\.template\.openstack\.org$/ {
-  class { 'openstack_project::turbo_hipster':
+  class { 'rcbau::turbo_hipster':
     rs_cloud_user            => hiera("th_rackspace_user"),
     rs_cloud_pass            => hiera("th_rackspace_pass"),
-    zuul_server              => "zuultest-1204.rcbops.com",
+    zuul_server              => hiera("zuul_server"),
     zuul_port                => 4730,
     ssh_private_key          => hiera("th_private_ssh_key"),
     plugin                   => 'cookbooks_ci',
