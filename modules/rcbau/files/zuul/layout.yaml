@@ -28,14 +28,14 @@ pipelines:
         to: "joshua.hesketh@gmail.com"
 #      gerrit:
 #        verified: 1
-      mysql:
-        verified: 1
+#      mysql:
+#        verified: 1
     failure:
       smtp:
         to: "joshua.hesketh@gmail.com"
 #        to: "joshua.hesketh@gmail.com, rcbau@lists.rcbops.com"
-      mysql:
-        verified: -1
+#      mysql:
+#        verified: -1
 #      gerrit:
 #        verified: -1
     success-message: "Database migration testing successful."

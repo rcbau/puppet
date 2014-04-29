@@ -21,6 +21,10 @@ node 'zuul-test.rcbops.com' {
   }
 }
 
+# The following nodes come from nodepool where the hostname is hardcoded
+# to have template.openstack.org appended. This should be fixed in nodepool
+# upstream
+
 node /th-mysql-\d+\.template\.openstack\.org$/ {
   class { 'rcbau::turbo_hipster':
     mysql_root_password => hiera('nodepool_mysql_root_password'),
