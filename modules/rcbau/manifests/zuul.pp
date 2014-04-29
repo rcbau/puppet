@@ -30,11 +30,9 @@ class rcbau::zuul(
     zuul_ssh_private_key => $zuul_ssh_private_key,
     url_pattern          => $url_pattern,
     zuul_url             => $zuul_url,
-    push_change_refs     => false,
     job_name_in_report   => true,
     status_url           => $status_url,
     statsd_host          => $statsd_host,
-    replication_targets  => $replication_targets,
   }
 
   file { '/etc/zuul/layout.yaml':

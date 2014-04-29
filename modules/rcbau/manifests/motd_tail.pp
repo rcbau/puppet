@@ -2,7 +2,7 @@
 #
 # Set the message of the day tail
 class rcbau::motd_tail (
-  $template = 'motd/motd.tail.erb',
+  $template = 'rcbau/motd/motd.tail.erb',
 ) {
   file { '/etc/motd.tail':
     ensure  => file,
