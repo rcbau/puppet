@@ -30,12 +30,14 @@ class rcbau::turbo_hipster (
   $rs_cloud_pass = "",
   $manage_start_script = true,
   $plugin = "db_migration",
+  $stop_puppet = false,
 ) {
   include openstack_project
 
   class { 'rcbau::server':
     iptables_public_tcp_ports => [80, 443],
     sysadmins                 => $sysadmins,
+    stop_puppet               => $stop_puppet,
   }
 
   class { '::turbo_hipster':

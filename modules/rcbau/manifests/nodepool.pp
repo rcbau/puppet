@@ -13,9 +13,11 @@ class rcbau::nodepool(
   $git_source_repo = 'https://git.openstack.org/openstack-infra/nodepool',
   $revision = 'master',
   $puppetmaster = '',
+  $stop_puppet = false,
 ) {
   class { 'rcbau::server':
-    sysadmins                 => $sysadmins,
+    sysadmins   => $sysadmins,
+    stop_puppet => $stop_puppet,
   }
 
   class { '::nodepool':

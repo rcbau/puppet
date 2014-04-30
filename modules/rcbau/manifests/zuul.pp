@@ -12,6 +12,7 @@ class rcbau::zuul(
   $gearman_workers = [],
   $replication_targets = [],
   $status_url = 'http://status.rcbops.com/zuul/',
+  $stop_puppet = false,
 ) {
   # Turn a list of hostnames into a list of iptables rules
   #$iptables_rules = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
@@ -21,6 +22,7 @@ class rcbau::zuul(
 #    iptables_rules6           => $iptables_rules,  # This will need to be locked down.
 #    iptables_rules4           => $iptables_rules,
     sysadmins                 => $sysadmins,
+    stop_puppet               => $stop_puppet,
   }
 
   class { '::zuul':

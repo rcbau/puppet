@@ -25,7 +25,7 @@ node 'zuul-test.rcbops.com' {
 # to have template.openstack.org appended. This should be fixed in nodepool
 # upstream
 
-node /th-mysql-\d+\.template\.openstack\.org$/ {
+node /th-mysql-(\d+\.template|.*\.slave)\.openstack\.org$/ {
   class { 'rcbau::turbo_hipster':
     mysql_root_password => hiera('nodepool_mysql_root_password'),
     rs_cloud_user       => hiera("th_rackspace_user"),
@@ -44,8 +44,7 @@ node /th-mysql-\d+\.template\.openstack\.org$/ {
   )
 }
 
-
-node /th-percona-\d+\.template\.openstack\.org$/ {
+node /th-percona-(\d+\.template|.*\.slave)\.openstack\.org$/ {
   class { 'rcbau::turbo_hipster':
     mysql_root_password      => hiera('nodepool_mysql_root_password'),
     database_engine_package  => "percona-server-server",
@@ -66,7 +65,7 @@ node /th-percona-\d+\.template\.openstack\.org$/ {
   )
 }
 
-node /th-maria-\d+\.template\.openstack\.org$/ {
+node /th-maria-(\d+\.template|.*\.slave)\.openstack\.org$/ {
   class { 'rcbau::turbo_hipster':
     mysql_root_password      => hiera('nodepool_mysql_root_password'),
     database_engine_package  => "mariadb-server",
