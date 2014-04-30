@@ -47,6 +47,12 @@ class rcbau::zuul(
     notify => Exec['zuul-reload'],
   }
 
+  file { '/etc/zuul/merger-logging.conf':
+    ensure => present,
+    source => 'puppet:///modules/rcbau/zuul/merger-logging.conf',
+    notify => Exec['zuul-reload'],
+  }
+
   file { '/etc/zuul/gearman-logging.conf':
     ensure => present,
     source => 'puppet:///modules/rcbau/zuul/gearman-logging.conf',
