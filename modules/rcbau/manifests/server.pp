@@ -71,5 +71,16 @@ class rcbau::server (
     notify => Service['puppet']
   }
 
+  # Install common/useful packages
+  package {'htop':
+    ensure => present,
+  }
+  package {'iftop':
+    ensure => present,
+  }
+  package {'strace':
+    ensure => present,
+  }
+
 }
 
