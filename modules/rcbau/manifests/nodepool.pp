@@ -61,4 +61,11 @@ class rcbau::nodepool(
     content => template('rcbau/nodepool/prepare_node_turbo_hipster.sh.erb'),
     require => File['/etc/nodepool/scripts'],
   }
+
+  file { '/var/log/nodepool/image':
+    ensure  => directory,
+    owner   => 'nodepool',
+    group   => 'nodepool',
+    require => File['/var/log/nodepool'],
+  }
 }
