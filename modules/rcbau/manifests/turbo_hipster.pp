@@ -30,7 +30,7 @@ class rcbau::turbo_hipster (
   $rs_cloud_pass = "",
   $manage_start_script = true,
   $plugin = "db_migration",
-  $stop_puppet = false,
+  $stop_puppet = true,
 ) {
   include openstack_project
 

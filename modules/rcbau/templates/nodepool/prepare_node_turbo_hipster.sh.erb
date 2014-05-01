@@ -40,6 +40,3 @@ fi
 sudo puppet agent --waitforcert 60 --server puppet-master --no-daemonize --onetime --verbose --show_diff --no-splay
 sleep 5
 sudo puppet agent --waitforcert 60 --server puppet-master --no-daemonize --onetime --verbose --show_diff --no-splay
-
-# Stop puppet (cron) from running while template is being turned into an image.
-sudo touch /root/NO_PUPPET
