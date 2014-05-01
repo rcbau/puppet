@@ -65,4 +65,11 @@ class rcbau::zuul(
   class { '::zuul::server': }
   class { '::zuul::merger': }
 
+  file { "/home/zuul/.gitconfig":
+    ensure => present,
+    source => 'puppet:///modules/rcbau/zuul/gitconfig',
+    owner  => 'zuul',
+    group  => 'zuul',
+    mode   => '0664',
+  }
 }
