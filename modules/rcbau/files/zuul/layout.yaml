@@ -79,9 +79,9 @@ pipelines:
     failure-message: "Silent test failed"
 
 jobs:
-  - name: ^gate-real-db-upgrade_.*$
+  - name: ^real-db-upgrade_.*$
     failure-message: Database updates did not apply well to a real set of data...
-  - name: ^thw[0-9]+_gate-real-db-upgrade_.*$
+  - name: ^thw[0-9]+_-real-db-upgrade_.*$
     failure-message: Experimental checks did not complete...
   - name: ^.*user_001$
     voting: true
@@ -89,20 +89,20 @@ jobs:
 projects:
   - name: openstack/nova
     check:
-      - gate-real-db-upgrade_nova_mysql_devstack_131007
-      - gate-real-db-upgrade_nova_mysql_user_001
-      - gate-real-db-upgrade_nova_percona_devstack_131007
-      - gate-real-db-upgrade_nova_percona_user_001
-      - gate-real-db-upgrade_nova_mysql_user_002
-      - gate-real-db-upgrade_nova_percona_user_002
+      - real-db-upgrade_nova_mysql_devstack_131007
+      - real-db-upgrade_nova_mysql_user_001
+      - real-db-upgrade_nova_percona_devstack_131007
+      - real-db-upgrade_nova_percona_user_001
+      - real-db-upgrade_nova_mysql_user_002
+      - real-db-upgrade_nova_percona_user_002
     experimental:
-      - thw-mysql-010_gate-real-db-upgrade_nova_mysql_user_001
-      - thw-percona-010_gate-real-db-upgrade_nova_percona_user_001
+      - thw-mysql-010_real-db-upgrade_nova_mysql_user_001
+      - thw-percona-010_real-db-upgrade_nova_percona_user_001
     silent:
-      - gate-real-db-upgrade_nova_mysql_devstack_131007
-      - gate-real-db-upgrade_nova_mysql_user_001
-      - gate-real-db-upgrade_nova_percona_devstack_131007
-      - gate-real-db-upgrade_nova_percona_user_001
-      - gate-real-db-upgrade_nova_mysql_user_002
-      - gate-real-db-upgrade_nova_percona_user_002
+      - real-db-upgrade_nova_mysql_devstack_131007
+      - real-db-upgrade_nova_mysql_user_001
+      - real-db-upgrade_nova_percona_devstack_131007
+      - real-db-upgrade_nova_percona_user_001
+      - real-db-upgrade_nova_mysql_user_002
+      - real-db-upgrade_nova_percona_user_002
 
