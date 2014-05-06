@@ -24,6 +24,7 @@ class turbo_hipster (
     home       => "/home/$th_user",
     shell      => '/bin/bash',
     gid        => $th_user,
+    groups     => 'adm',
     managehome => true,
     require    => Group[$th_user],
     notify     => Vcsrepo["$th_repo_destination"],
@@ -217,5 +218,9 @@ class turbo_hipster (
     path    => '/usr/local/bin:/usr/bin:/bin/',
     onlyif  => '[ $(grep -ic /etc/turbo-hipster/start_TH_service.sh /etc/rc.local) -eq 0 ]',
     require => File['/etc/turbo-hipster/start_TH_service.sh'],
+  }
+
+  package { 'virtualenvwrapper':
+    ensure => present,
   }
 }
