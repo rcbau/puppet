@@ -15,8 +15,8 @@ class turbo_hipster::db_migration (
   $charset     = 'utf8',
   $grant       = 'all',
   $ensure      = 'present',
-  $mariadb_version = '5.5'
-
+  $mariadb_version = '5.5',
+  $slow_query_log = '/var/log/mysql/slow-queries.log',
 ) {
   define database_engine_repo {
     if $database_engine == 'percona' {
@@ -41,10 +41,11 @@ class turbo_hipster::db_migration (
   class { 'mysql::server':
     package_name => $database_engine_package,
     config_hash  => {
-      'root_password'  => $mysql_root_password,
-      'default_engine' => 'InnoDB',
-      'bind_address'   => $database_engine_bind,
-      'port'           => $database_engine_port,
+      'root_password'    => $mysql_root_password,
+      'default_engine'   => 'InnoDB',
+      'bind_address'     => $database_engine_bind,
+      'port'             => $database_engine_port,
+      'log-slow-queries' => $slow_query_log,
     },
     require  => Database_engine_repo['database_repo'],
   }
