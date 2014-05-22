@@ -50,7 +50,7 @@ node /th-percona-(\d+\.template|.*\.slave)\.openstack\.org$/ {
     database_engine          => "percona",
     rs_cloud_user            => hiera("th_rackspace_user"),
     rs_cloud_pass            => hiera("th_rackspace_pass"),
-    gearman_server      => 'zuul-test.rcbops.com',
+    gearman_server           => 'zuul-test.rcbops.com',
     ssh_private_key          => hiera("th_private_ssh_key"),
     dataset_host             => hiera("th_dataset_host"),
     dataset_path             => hiera("th_dataset_path"),
@@ -70,7 +70,7 @@ node /th-maria-(\d+\.template|.*\.slave)\.openstack\.org$/ {
     database_engine          => "mariadb",
     rs_cloud_user            => hiera("th_rackspace_user"),
     rs_cloud_pass            => hiera("th_rackspace_pass"),
-    gearman_server      => 'zuul-test.rcbops.com',
+    gearman_server           => 'zuul-test.rcbops.com',
     ssh_private_key          => hiera("th_private_ssh_key"),
     dataset_host             => hiera("th_dataset_host"),
     dataset_path             => hiera("th_dataset_path"),
@@ -87,7 +87,7 @@ node /th-cookbooks-\d+\.template\.openstack\.org$/ {
   class { 'rcbau::turbo_hipster':
     rs_cloud_user            => hiera("th_rackspace_user"),
     rs_cloud_pass            => hiera("th_rackspace_pass"),
-    gearman_server      => 'zuul-test.rcbops.com',
+    gearman_server           => 'zuul-test.rcbops.com',
     ssh_private_key          => hiera("th_private_ssh_key"),
     plugin                   => 'cookbooks_ci',
   }
