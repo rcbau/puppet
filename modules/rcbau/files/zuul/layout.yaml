@@ -21,18 +21,18 @@ pipelines:
           branch: master
     start:
       smtp:
-        to: "joshua.hesketh@gmail.com"
+        to: "joshua.hesketh+zuul-test@gmail.com"
     success:
       smtp:
 #        to: "joshua.hesketh@gmail.com, michael.still@rackspace.com"
-        to: "joshua.hesketh@gmail.com"
+        to: "joshua.hesketh+zuul-test@gmail.com"
 #      gerrit:
 #        verified: 1
 #      mysql:
 #        verified: 1
     failure:
       smtp:
-        to: "joshua.hesketh@gmail.com"
+        to: "joshua.hesketh+zuul-test@gmail.com"
 #        to: "joshua.hesketh@gmail.com, rcbau@lists.rcbops.com"
 #      mysql:
 #        verified: -1
