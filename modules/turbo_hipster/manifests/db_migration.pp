@@ -45,7 +45,7 @@ class turbo_hipster::db_migration (
       'default_engine'   => 'InnoDB',
       'bind_address'     => $database_engine_bind,
       'port'             => $database_engine_port,
-      'log-slow-queries' => $slow_query_log,
+#      'log-slow-queries' => $slow_query_log,
     },
     require  => Database_engine_repo['database_repo'],
   }
