@@ -7,7 +7,7 @@ class turbo_hipster (
   $th_dataset_path = "/var/lib/turbo-hipster/",
   $th_user = "th",
   $gerrit_site = "http://review.openstack.org",
-  $git_origin = "git://git.openstack.org/",
+  $git_origin = "git://git.openstack.org",
   $gearman_server = "",
   $gearman_port = 4730,
   $pypi_mirror = "http://pypi.python.org",
