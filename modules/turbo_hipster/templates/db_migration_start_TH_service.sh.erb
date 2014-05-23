@@ -32,6 +32,10 @@ sudo /sbin/iptables -I INPUT -j TH_CHAIN
 sudo /sbin/iptables -A TH_CHAIN -p tcp --dport 3306 ! -d 172.16.0.1 -j DROP
 sudo /sbin/iptables -A TH_CHAIN -p tcp --dport 3306 ! -d 172.16.0.1 -j DROP
 
+( while ! nc -vz $dataset_source 22; do sleep 1; done ) & pid=$!
+( sleep 600 && kill -HUP $pid ) 2>/dev/null & watcher=$!
+wait $pid 2>/dev/null && pkill -HUP -P $watcher
+
 # Sync the datasets
 # <todo> rsync -pa $dataset_username@$dataset_source $dataset_dest
 sudo su - -c "rsync -a $dataset_user@$dataset_host:$dataset_path /var/lib/turbo-hipster/" $th_user
