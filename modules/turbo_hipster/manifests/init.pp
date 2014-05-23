@@ -63,7 +63,7 @@ class turbo_hipster (
 
   file { '/var/cache/pip':
     ensure => directory,
-    mode   => '0755',
+    mode   => '0777',
     owner  => 'root',
     group  => 'root',
   }
