@@ -135,9 +135,6 @@ class turbo_hipster::db_migration (
   package {'libxslt-dev':
     ensure => present,
   }
-  package {'libmysqlclient-dev':
-    ensure => present,
-  }
   package {'pep8':
     ensure => present,
   }
