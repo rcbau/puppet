@@ -13,7 +13,7 @@ class turbo_hipster::db_migration (
   $database_engine_port = '3306',
   $mysql_root_password,
   $charset     = 'utf8',
-  $grant       = 'all',
+  $grant       = 'ALL',
   $ensure      = 'present',
   $mariadb_version = '5.5',
   $slow_query_log = '/var/log/mysql/slow-queries.log',
@@ -40,46 +40,67 @@ class turbo_hipster::db_migration (
 
   class { 'mysql::server':
     package_name => $database_engine_package,
-    config_hash  => {
-      'root_password'    => $mysql_root_password,
-      'default_engine'   => 'InnoDB',
-      'bind_address'     => $database_engine_bind,
-      'port'             => $database_engine_port,
-#      'log-slow-queries' => $slow_query_log,
+    root_password => $mysql_root_password,
+    override_options  => { 
+      'mysqld' => {
+        'default-storage-engine' => 'InnoDB',
+        'bind_address'           => $database_engine_bind,
+        'port'                   => $database_engine_port,
+        'log-slow-queries'       => $slow_query_log,
+      }
+    },
+    users => {
+      "${th_test_user}@${th_test_host}" => {
+        ensure                   => $ensure,
+        max_connections_per_hour => '0',
+        max_queries_per_hour     => '0',
+        max_updates_per_hour     => '0',
+        max_user_connections     => '0',
+        password_hash            => mysql_password($th_test_pass),
+      },
+    },
+    grants => {
+      "${th_test_user}@${th_test_host}/*.*" => {
+        ensure     => $ensure,
+        options    => ['GRANT'],
+        privileges => [$grant],
+        table      => '*.*',
+        user       => "${th_test_user}@${th_test_host}",
+      },
     },
     require  => Database_engine_repo['database_repo'],
   }
 
-  include mysql::python
+  #include mysql::python
 
   # first create the TH Test database user.
-  database_user { "${th_test_user}@${th_test_host}":
-    ensure        => $ensure,
-    password_hash => mysql_password($th_test_pass),
-    provider      => 'mysql',
-    require       => Class['mysql::server'],
-  }
+#  database_user { "${th_test_user}@${th_test_host}":
+#    ensure        => $ensure,
+#    password_hash => mysql_password($th_test_pass),
+#    provider      => 'mysql',
+#    require       => Class['mysql::server'],
+#  }
 
   # define th_database so we can use an array to define all TH databases.
-  define th_database {
-    database { "$title":
-      ensure   => $ensure,
-      charset  => $charset,
-      provider => 'mysql',
-      require  => Class['mysql::server'],
-    }
-
-    if $ensure == 'present' {
-      database_grant { "${th_test_user}@${th_test_host}/${title}":
-        privileges => $grant,
-        provider   => 'mysql',
-        require    => Database_user["${th_test_user}@${th_test_host}"],
-      }
-    }
-  }
-  th_database { $th_databases:
-    require =>  Database_user["${th_test_user}@${th_test_host}"],
-  }
+#  define th_database {
+#    database { "$title":
+#      ensure   => $ensure,
+#      charset  => $charset,
+#      provider => 'mysql',
+#      require  => Class['mysql::server'],
+#    }
+#
+#    if $ensure == 'present' {
+#      database_grant { "${th_test_user}@${th_test_host}/${title}":
+#        privileges => $grant,
+#        provider   => 'mysql',
+#        require    => Database_user["${th_test_user}@${th_test_host}"],
+#      }
+#    }
+#  }
+#  th_database { $th_databases:
+#    require =>  Database_user["${th_test_user}@${th_test_host}"],
+#  }
 
   file { '/etc/turbo-hipster/conf.d/db_migration.yaml':
     ensure  => present,
