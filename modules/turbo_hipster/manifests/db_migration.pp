@@ -156,9 +156,6 @@ class turbo_hipster::db_migration (
   package {'python-git':
     ensure => present,
   }
-  package {'virtualenvwrapper':
-    ensure => present,
-  }
   package {'python-numpy':
     ensure => present,
   }
