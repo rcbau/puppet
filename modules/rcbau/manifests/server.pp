@@ -107,12 +107,13 @@ class rcbau::server (
   package {'ack-grep':
     ensure => present,
   }
-
   package {'htop':
     ensure => present,
   }
-
   package {'iftop':
+    ensure => present,
+  }
+  package {'vim':
     ensure => present,
   }
 }
