@@ -126,6 +126,9 @@ class turbo_hipster::db_migration (
   package {'build-essential':
     ensure => present,
   }
+  package {'libffi-dev':
+    ensure => present,
+  }
   package {'libxml2-dev':
     ensure => present,
   }
