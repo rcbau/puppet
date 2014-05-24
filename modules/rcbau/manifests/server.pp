@@ -104,6 +104,10 @@ class rcbau::server (
   }
 
   # Install common/useful packages
+  package {'ack-grep':
+    ensure => present,
+  }
+
   package {'htop':
     ensure => present,
   }
