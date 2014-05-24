@@ -41,12 +41,14 @@ class turbo_hipster::db_migration (
   class { 'mysql::server':
     package_name => $database_engine_package,
     root_password => $mysql_root_password,
-    override_options  => { 
+    override_options  => {
       'mysqld' => {
         'default-storage-engine' => 'InnoDB',
         'bind_address'           => $database_engine_bind,
         'port'                   => $database_engine_port,
-        'log-slow-queries'       => $slow_query_log,
+        'slow_query_log'         => 1,
+        'slow_query_log_file'    => $slow_query_log,
+        'long_query_time'        => 10,
       }
     },
     users => {
