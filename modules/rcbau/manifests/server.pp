@@ -104,11 +104,16 @@ class rcbau::server (
   }
 
   # Install common/useful packages
+  package {'ack-grep':
+    ensure => present,
+  }
   package {'htop':
     ensure => present,
   }
-
   package {'iftop':
+    ensure => present,
+  }
+  package {'vim':
     ensure => present,
   }
 }

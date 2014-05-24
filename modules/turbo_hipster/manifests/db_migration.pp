@@ -41,12 +41,14 @@ class turbo_hipster::db_migration (
   class { 'mysql::server':
     package_name => $database_engine_package,
     root_password => $mysql_root_password,
-    override_options  => { 
+    override_options  => {
       'mysqld' => {
         'default-storage-engine' => 'InnoDB',
         'bind_address'           => $database_engine_bind,
         'port'                   => $database_engine_port,
-        'log-slow-queries'       => $slow_query_log,
+        'slow_query_log'         => 1,
+        'slow_query_log_file'    => $slow_query_log,
+        'long_query_time'        => 10,
       }
     },
     users => {
@@ -119,4 +121,49 @@ class turbo_hipster::db_migration (
     group   => 'root',
     require => File['/etc/turbo-hipster'],
   }
+
+  # Install required packages
+  package {'build-essential':
+    ensure => present,
+  }
+  package {'libxml2-dev':
+    ensure => present,
+  }
+  package {'libxml2-utils':
+    ensure => present,
+  }
+  package {'libxslt-dev':
+    ensure => present,
+  }
+  package {'libmysqlclient-dev':
+    ensure => present,
+  }
+  package {'pep8':
+    ensure => present,
+  }
+  package {'postgresql-server-dev-9.1':
+    ensure => present,
+  }
+  package {'python2.7-dev':
+    ensure => present,
+  }
+  package {'python-coverage':
+    ensure => present,
+  }
+  package {'python-netaddr':
+    ensure => present,
+  }
+  package {'python-mysqldb':
+    ensure => present,
+  }
+  package {'python-git':
+    ensure => present,
+  }
+  package {'virtualenvwrapper':
+    ensure => present,
+  }
+  package {'python-numpy':
+    ensure => present,
+  }
+
 }
