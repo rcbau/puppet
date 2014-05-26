@@ -103,16 +103,28 @@ class rcbau::server (
     require => File['/root/run_puppet.sh'],
   }
 
+  # setup sudo
+  File <| title == '/etc/sudoers' |> {
+    ensure => present,
+    mode   => '0440',
+    owner  => 'root',
+    group  => 'root',
+    source => 'puppet:///modules/rcbau/sudoers',
+  }
+
   # Install common/useful packages
   package {'ack-grep':
     ensure => present,
   }
+
   package {'htop':
     ensure => present,
   }
+
   package {'iftop':
     ensure => present,
   }
+
   package {'vim':
     ensure => present,
   }

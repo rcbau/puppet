@@ -24,7 +24,7 @@ class turbo_hipster (
     home       => "/home/$th_user",
     shell      => '/bin/bash',
     gid        => $th_user,
-    groups     => ['adm', 'admin', 'sudo',],
+    groups     => ['adm', 'admin',],
     managehome => true,
     require    => Group[$th_user],
     notify     => Vcsrepo["$th_repo_destination"],
@@ -223,4 +223,13 @@ class turbo_hipster (
   package { 'virtualenvwrapper':
     ensure => present,
   }
+
+  file { '/etc/sudoers.d/th':
+    ensure => present,
+    mode   => '0440',
+    owner  => 'root',
+    group  => 'root',
+    content => template('turbo_hipster/th.sudoers.erb'),
+  }
+
 }
