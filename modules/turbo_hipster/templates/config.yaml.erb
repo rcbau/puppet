@@ -8,8 +8,6 @@ debug_log: /var/log/turbo-hipster/debug.log
 jobs_working_dir: /var/lib/turbo-hipster/jobs
 git_working_dir: /var/lib/turbo-hipster/git
 pip_download_cache: /var/cache/pip
-baseline_command: "baseline.sh %s"
-flavor: rackspace_standard_2cpu_2gb
 
 publish_logs:
   type: swift
@@ -17,7 +15,7 @@ publish_logs:
   tenant: " "
   user: <%= @rs_cloud_user %>
   password: <%= @rs_cloud_pass %>
-  container: syd_turbo_hipster_results
+  container: syd_turbo_hipster_results_v2
   region: SYD
   prepend_url: http://www.rcbops.com/turbo_hipster/results/
 
