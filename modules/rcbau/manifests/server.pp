@@ -6,7 +6,7 @@ class rcbau::server (
   $iptables_public_udp_ports = [],
   $iptables_rules4           = [],
   $iptables_rules6           = [],
-  $sysadmins                 = [],
+  $sysadmins                 = ['rcbau'],
   $certname                  = $::fqdn,
   $install_users             = false,
   $puppetmaster              = hiera('puppetmaster'),
@@ -110,6 +110,16 @@ class rcbau::server (
     owner  => 'root',
     group  => 'root',
     source => 'puppet:///modules/rcbau/sudoers',
+  }
+
+  File <| title == $::exim::params::config_file |> {
+    ensure  => present,
+    content => template("rcbau/exim4.conf.erb"),
+    group   => 'root',
+    mode    => '0444',
+    owner   => 'root',
+    replace => true,
+    require => Package[$::exim::params::package],
   }
 
   # Install common/useful packages

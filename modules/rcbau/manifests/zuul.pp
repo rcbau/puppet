@@ -7,7 +7,7 @@ class rcbau::zuul(
   $zuul_ssh_private_key = '',
   $url_pattern = '',
   $zuul_url = '',
-  $sysadmins = [],
+  $sysadmins = ['rcbau',],
   $statsd_host = '',
   $gearman_workers = [],
   $replication_targets = [],
