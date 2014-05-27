@@ -239,7 +239,7 @@ rfc1413_query_timeout = 0s
 # unqualified addresses (just a local part) from certain hosts, you can specify
 # these hosts by setting one or both of
 #
-# sender_unqualified_hosts =
+sender_unqualified_hosts = localhost
 # recipient_unqualified_hosts =
 #
 # to control sender and recipient addresses, respectively. When this is done,
@@ -420,6 +420,7 @@ acl_check_rcpt:
 
   accept  local_parts   = postmaster
           domains       = +local_domains
+
 
   # Deny unless the sender address can be verified.
 
