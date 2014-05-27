@@ -24,7 +24,7 @@ class turbo_hipster (
     home       => "/home/$th_user",
     shell      => '/bin/bash',
     gid        => $th_user,
-    groups     => ['adm', 'admin',],
+    groups     => ['adm',],
     managehome => true,
     require    => Group[$th_user],
     notify     => Vcsrepo["$th_repo_destination"],
