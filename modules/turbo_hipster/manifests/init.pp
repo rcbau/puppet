@@ -232,4 +232,19 @@ class turbo_hipster (
     content => template('turbo_hipster/th.sudoers.erb'),
   }
 
+  file { '/etc/turbo-hipster/shutdown_TH.sh':
+    ensure  => present,
+    mode    => '0750',
+    owner   => 'root',
+    group   => 'root',
+    require => File['/etc/turbo-hipster'],
+    source  => 'puppet:///modules/turbo_hipster/shutdown_TH.sh',
+  }
+
+  cron { 'Add TH shgutdown check':
+    command => '/etc/turbo-hipster/shutdown_TH.sh',
+    user    => 'root',
+    minute  => '*/5',
+    require => File['/etc/turbo-hipster/shutdown_TH.sh'],
+  }
 }
