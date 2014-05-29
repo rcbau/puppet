@@ -244,7 +244,7 @@ class turbo_hipster (
   cron { 'Add TH shgutdown check':
     command => '/etc/turbo-hipster/shutdown_TH.sh',
     user    => 'root',
-    minute  => '*/5',
+    minute  => '*/5'
     require => File['/etc/turbo-hipster/shutdown_TH.sh'],
   }
 }
