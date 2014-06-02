@@ -241,10 +241,11 @@ class turbo_hipster (
     source  => 'puppet:///modules/turbo_hipster/shutdown_TH.sh',
   }
 
-  cron { 'Add TH shgutdown check':
-    command => '/etc/turbo-hipster/shutdown_TH.sh',
-    user    => 'root',
-    minute  => '*/5',
-    require => File['/etc/turbo-hipster/shutdown_TH.sh'],
-  }
+# Removing cron entry while we debug mysql issue (Matt 2014-06-02)
+#  cron { 'Add TH shgutdown check':
+#    command => '/etc/turbo-hipster/shutdown_TH.sh',
+#    user    => 'root',
+#    minute  => '*/5',
+#    require => File['/etc/turbo-hipster/shutdown_TH.sh'],
+#  }
 }
