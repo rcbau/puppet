@@ -39,9 +39,10 @@ class turbo_hipster::db_migration (
   database_engine_repo { 'database_repo': }
 
   class { 'mysql::server':
-    package_name => $database_engine_package,
-    root_password => $mysql_root_password,
-    override_options  => {
+    package_name            => $database_engine_package,
+    root_password           => $mysql_root_password,
+    remove_default_accounts => true,
+    override_options        => {
       'mysqld' => {
         'default-storage-engine' => 'InnoDB',
         'bind_address'           => $database_engine_bind,
@@ -51,7 +52,7 @@ class turbo_hipster::db_migration (
         'long_query_time'        => 10,
       }
     },
-    users => {
+    users                   => {
       "${th_test_user}@${th_test_host}" => {
         ensure                   => $ensure,
         max_connections_per_hour => '0',
@@ -61,7 +62,7 @@ class turbo_hipster::db_migration (
         password_hash            => mysql_password($th_test_pass),
       },
     },
-    grants => {
+    grants                  => {
       "${th_test_user}@${th_test_host}/*.*" => {
         ensure     => $ensure,
         options    => ['GRANT'],
@@ -70,7 +71,7 @@ class turbo_hipster::db_migration (
         user       => "${th_test_user}@${th_test_host}",
       },
     },
-    require  => Database_engine_repo['database_repo'],
+    require                 => Database_engine_repo['database_repo'],
   }
 
   #include mysql::python
