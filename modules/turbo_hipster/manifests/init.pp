@@ -1,7 +1,8 @@
 # == Class: turbo-hipster
 #
 class turbo_hipster (
-  $th_repo = 'https://git.openstack.org/stackforge/turbo-hipster',
+#  $th_repo = 'https://git.openstack.org/stackforge/turbo-hipster', 
+  $th_repo = 'https://github.com/matthewoliver/turbo-hipster.git',
   $th_repo_destination = '/opt/turbo-hipster',
   $th_repo_branch = "master",
   $th_dataset_path = "/var/lib/turbo-hipster/",
