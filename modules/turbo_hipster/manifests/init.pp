@@ -73,12 +73,12 @@ class turbo_hipster (
     ensure => present,
   }
 
-  exec { 'Uninstall pip version 4':
-    command     => "pip uninstall -y setuptools",
-    path        => '/usr/local/bin:/usr/bin:/bin/',
-    refreshonly => true,
-    onlyif      => "[ $(pip list |grep setuptools |grep -c 4.0) -gt 0 ]",
-  }
+#  exec { 'Uninstall pip version 4':
+#    command     => "pip uninstall -y setuptools",
+#    path        => '/usr/local/bin:/usr/bin:/bin/',
+#    refreshonly => true,
+#    onlyif      => "[ $(pip list |grep setuptools |grep -c 4.0) -gt 0 ]",
+#  }
 
   exec { 'install_th_dependencies' :
     command     => "pip install $th_repo_destination",
@@ -92,7 +92,7 @@ class turbo_hipster (
       File['/var/cache/pip'],
       Vcsrepo["$th_repo_destination"],
       Package['libmysqlclient-dev'],
-      Exec['Uninstall pip version 4'],
+#      Exec['Uninstall pip version 4'],
     ],
   }
 
