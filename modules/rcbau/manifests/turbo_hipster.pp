@@ -32,11 +32,16 @@ class rcbau::turbo_hipster (
   $manage_start_script = true,
   $plugin = "db_migration",
   $stop_puppet = true,
+  $iptables_rules4 = [
+    "-p tcp --dport 3306 ! -d 172.16.0.1 -j DROP",
+    "-p tcp --dport 3306  -d 172.16.0.1 -j ACCEPT",
+  ],
 ) {
   include openstack_project
 
   class { 'rcbau::server':
     iptables_public_tcp_ports => [80, 443],
+    iptables_rules4           => $iptables_rules4,
     sysadmins                 => $sysadmins,
     stop_puppet               => $stop_puppet,
   }
