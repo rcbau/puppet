@@ -47,6 +47,10 @@ dataset_path="<%= @dataset_path %>"
 dataset_user="<%= @dataset_user %>"
 th_user="<%= @th_user %>"
 
+( while ! nc -vz $dataset_host 22; do sleep 1; done ) & pid=$!
+( sleep 600 && kill -HUP $pid ) 2>/dev/null & watcher=$!
+wait $pid 2>/dev/null && pkill -HUP -P $watcher
+
 sudo su - -c "rsync -a $dataset_user@$dataset_host:$dataset_path /var/lib/turbo-hipster/" $th_user
 sudo su - -c "rsync -a $dataset_user@$dataset_host:$dataset_path /var/lib/turbo-hipster/" $th_user
 sudo su - -c "rsync -a $dataset_user@$dataset_host:$dataset_path /var/lib/turbo-hipster/" $th_user
