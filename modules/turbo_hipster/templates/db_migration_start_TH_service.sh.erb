@@ -38,10 +38,10 @@ wait $pid 2>/dev/null && pkill -HUP -P $watcher
 
 # Sync the datasets
 # <todo> rsync -pa $dataset_username@$dataset_source $dataset_dest
-sudo su - -c "rsync -a $dataset_user@$dataset_host:$dataset_path /var/lib/turbo-hipster/" $th_user
-sudo su - -c "rsync -a $dataset_user@$dataset_host:$dataset_path /var/lib/turbo-hipster/" $th_user
-sudo su - -c "rsync -a $dataset_user@$dataset_host:$dataset_path /var/lib/turbo-hipster/" $th_user
-chown $th_user:$th_user -R /var/lib/turbo-hipster/
+#sudo su - -c "rsync -a $dataset_user@$dataset_host:$dataset_path /var/lib/turbo-hipster/" $th_user
+#sudo su - -c "rsync -a $dataset_user@$dataset_host:$dataset_path /var/lib/turbo-hipster/" $th_user
+#sudo su - -c "rsync -a $dataset_user@$dataset_host:$dataset_path /var/lib/turbo-hipster/" $th_user
+#chown $th_user:$th_user -R /var/lib/turbo-hipster/
 
 # start up turbo-hipster.
 if [ $(ps -eaf |grep -ci "\/[t]urbo-hipster ") -gt 0 ]

@@ -32,13 +32,13 @@ providers:
       - name: th-mysql
         base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
         min-ram: 8192
-        setup: prepare_node_turbo_hipster.sh
+        setup: prepare_node_turbo_hipster_db.sh
         username: nodepool
         private-key: /home/nodepool/.ssh/id_rsa
       - name: th-percona
         base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
         min-ram: 8192
-        setup: prepare_node_turbo_hipster.sh
+        setup: prepare_node_turbo_hipster_db.sh
         username: nodepool
         private-key: /home/nodepool/.ssh/id_rsa
       - name: th-cookbooks

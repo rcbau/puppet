@@ -14,6 +14,11 @@ class rcbau::nodepool(
   $revision = 'master',
   $puppetmaster = '',
   $stop_puppet = false,
+  $th_user = "th",
+  $dataset_host =  "",
+  $dataset_path = "",
+  $dataset_user = "",
+  
 ) {
   class { 'rcbau::server':
     sysadmins   => $sysadmins,
@@ -59,6 +64,15 @@ class rcbau::nodepool(
     group   => 'root',
     mode    => '0755',
     content => template('rcbau/nodepool/prepare_node_turbo_hipster.sh.erb'),
+    require => File['/etc/nodepool/scripts'],
+  }
+
+  file { '/etc/nodepool/scripts/prepare_node_turbo_hipster_db.sh':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    content => template('rcbau/nodepool/prepare_node_turbo_hipster_db.sh.erb'),
     require => File['/etc/nodepool/scripts'],
   }
 

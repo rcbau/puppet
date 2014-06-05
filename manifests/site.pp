@@ -9,6 +9,9 @@ node 'nodepool.rcbops.com' {
     git_source_repo          => 'https://github.com/matthewoliver/nodepool.git',
     puppetmaster             => hiera('puppetmaster'),
     revision                 => 'turbo-hipster',
+    dataset_host             => hiera("th_dataset_host"),
+    dataset_path             => hiera("th_dataset_path"),
+    dataset_user             => hiera("th_dataset_user"),
   }
 }
 
