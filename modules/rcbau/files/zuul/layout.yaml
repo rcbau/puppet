@@ -40,6 +40,7 @@ pipelines:
 #        verified: -1
     success-message: "Database migration testing successful."
     failure-message: "Database migration testing failed either due to migrations unable to be applied correctly or taking too long."
+    footer-message: "To recheck, leave 'recheck migrations' as a comment. More information: https://wiki.openstack.org/wiki/Nova/Turbo-Hipster"
 
   - name: experimental
     manager: IndependentPipelineManager
@@ -58,6 +59,7 @@ pipelines:
         to: "joshua.hesketh@gmail.com, michael.still@rackspace.com"
     success-message: "Experimental database migration testing successful."
     failure-message: "Experimental database migration testing failed either due to migrations unable to be applied correctly or taking too long."
+    footer-message: "To recheck, leave 'recheck migrations' as a comment. More information: https://wiki.openstack.org/wiki/Nova/Turbo-Hipster"
 
   - name: silent
     manager: IndependentPipelineManager
@@ -77,12 +79,11 @@ pipelines:
         to: "michael.still@rackspace.com"
     success-message: "Silent test passed"
     failure-message: "Silent test failed"
+    footer-message: "To recheck, leave 'recheck migrations' as a comment. More information: https://wiki.openstack.org/wiki/Nova/Turbo-Hipster"
 
 jobs:
   - name: ^real-db-upgrade_.*$
     failure-message: Database updates did not apply well to a real set of data...
-  - name: ^thw[0-9]+_-real-db-upgrade_.*$
-    failure-message: Experimental checks did not complete...
   - name: ^.*user_001$
     voting: true
 
@@ -96,8 +97,7 @@ projects:
       - real-db-upgrade_nova_mysql_user_002
       - real-db-upgrade_nova_percona_user_002
     experimental:
-      - thw-mysql-010_real-db-upgrade_nova_mysql_user_001
-      - thw-percona-010_real-db-upgrade_nova_percona_user_001
+      - noop
     silent:
       - real-db-upgrade_nova_mysql_devstack_131007
       - real-db-upgrade_nova_mysql_user_001
@@ -105,4 +105,3 @@ projects:
       - real-db-upgrade_nova_percona_user_001
       - real-db-upgrade_nova_mysql_user_002
       - real-db-upgrade_nova_percona_user_002
-
