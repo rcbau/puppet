@@ -90,18 +90,18 @@ jobs:
 projects:
   - name: openstack/nova
     check:
-      - real-db-upgrade_nova_mysql_devstack_131007
-      - real-db-upgrade_nova_mysql_user_001
-      - real-db-upgrade_nova_percona_devstack_131007
-      - real-db-upgrade_nova_percona_user_001
-      - real-db-upgrade_nova_mysql_user_002
-      - real-db-upgrade_nova_percona_user_002
+      - real-db-upgrade_nova_mysql_devstack_131007:th-mysql
+      - real-db-upgrade_nova_mysql_user_001:th-mysql
+      - real-db-upgrade_nova_percona_devstack_131007:th-percona
+      - real-db-upgrade_nova_percona_user_001:th-percona
+      - real-db-upgrade_nova_mysql_user_002:th-mysql
+      - real-db-upgrade_nova_percona_user_002:th-percona
     experimental:
       - noop
     silent:
-      - real-db-upgrade_nova_mysql_devstack_131007
-      - real-db-upgrade_nova_mysql_user_001
-      - real-db-upgrade_nova_percona_devstack_131007
-      - real-db-upgrade_nova_percona_user_001
-      - real-db-upgrade_nova_mysql_user_002
-      - real-db-upgrade_nova_percona_user_002
+      - real-db-upgrade_nova_mysql_devstack_131007:th-mysql
+      - real-db-upgrade_nova_mysql_user_001:th-mysql
+      - real-db-upgrade_nova_percona_devstack_131007:th-percona
+      - real-db-upgrade_nova_percona_user_001:th-percona
+      - real-db-upgrade_nova_mysql_user_002:th-mysql
+      - real-db-upgrade_nova_percona_user_002:th-percona
