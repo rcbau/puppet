@@ -51,14 +51,14 @@ providers:
 labels:
   - name: th-mysql
     image: th-mysql
-    min-ready: 10
+    min-ready: 5
 #    ready-script: start_TH_service.sh
     ghost-name: turbo-hipster
     providers:
       - name: rax-syd
   - name: th-percona
     image: th-percona
-    min-ready: 10
+    min-ready: 5
 #    ready-script: start_TH_service.sh
     ghost-name: turbo-hipster
     providers:

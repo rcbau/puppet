@@ -6,15 +6,10 @@ pipelines:
       gerrit:
         - event: comment-added
           branch: master
-          comment_filter: (?i)^\s*recheck migrations\s*$
+          comment_filter: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*recheck migrations\s*$
         - event: comment-added
           branch: master
-          comment_filter: (?i)^\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
-        - event: comment-added
-          branch: master
-          approval:
-            - verified: 1
-          email_filter: ^this_will_not_trigger_for_now$
+          comment_filter: (?i)^(Patch Set [0-9]+:)?( [\w\\+-]*)*(\n\n)?\s*recheck(( (?:bug|lp)[\s#:]*(\d+))|( no bug))\s*$
         - event: patchset-created
           branch: master
         - event: change-restored
