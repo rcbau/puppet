@@ -20,19 +20,19 @@ pipelines:
     success:
       smtp:
 #        to: "joshua.hesketh@gmail.com, michael.still@rackspace.com"
-        to: "joshua.hesketh+zuul-test@gmail.com, matt+zuul-test@oliver.net.au"
-#      gerrit:
-#        verified: 1
+        to: "joshua.hesketh+zuul-test@gmail.com, matt+zuul-test@oliver.net.au, michael.still@rackspace.com"
+      gerrit:
+        verified: 1
 #      mysql:
 #        verified: 1
     failure:
       smtp:
-        to: "joshua.hesketh+zuul-test@gmail.com, matt+zuul-test@oliver.net.au"
+        to: "joshua.hesketh+zuul-test@gmail.com, matt+zuul-test@oliver.net.au, rcbau@lists.rcbops.com"
 #        to: "joshua.hesketh@gmail.com, rcbau@lists.rcbops.com"
 #      mysql:
 #        verified: -1
-#      gerrit:
-#        verified: -1
+      gerrit:
+        verified: -1
     success-message: "Database migration testing successful."
     failure-message: "Database migration testing failed either due to migrations unable to be applied correctly or taking too long."
     footer-message: "To recheck, leave 'recheck migrations' as a comment. More information: https://wiki.openstack.org/wiki/Nova/Turbo-Hipster"
