@@ -33,7 +33,7 @@ node /th-mysql-(\d+\.template|.*\.slave)\.openstack\.org$/ {
     mysql_root_password => hiera('nodepool_mysql_root_password'),
     rs_cloud_user       => hiera("th_rackspace_user"),
     rs_cloud_pass       => hiera("th_rackspace_pass"),
-    gearman_server      => 'zuul-test.rcbops.com',
+    gearman_server      => 'zuul.rcbops.com',
     ssh_private_key     => hiera("th_private_ssh_key"),
     #TODO(mattoliverau) - the following 3 dataset lines can be removed
     dataset_host        => hiera("th_dataset_host"),
@@ -54,7 +54,7 @@ node /th-percona-(\d+\.template|.*\.slave)\.openstack\.org$/ {
     database_engine          => "percona",
     rs_cloud_user            => hiera("th_rackspace_user"),
     rs_cloud_pass            => hiera("th_rackspace_pass"),
-    gearman_server           => 'zuul-test.rcbops.com',
+    gearman_server           => 'zuul.rcbops.com',
     ssh_private_key          => hiera("th_private_ssh_key"),
     #TODO(mattoliverau) - the following 3 dataset lines can be removed
     dataset_host             => hiera("th_dataset_host"),
@@ -75,7 +75,7 @@ node /th-maria-(\d+\.template|.*\.slave)\.openstack\.org$/ {
     database_engine          => "mariadb",
     rs_cloud_user            => hiera("th_rackspace_user"),
     rs_cloud_pass            => hiera("th_rackspace_pass"),
-    gearman_server           => 'zuul-test.rcbops.com',
+    gearman_server           => 'zuul.rcbops.com',
     ssh_private_key          => hiera("th_private_ssh_key"),
     #TODO(mattoliverau) - the following 3 dataset lines can be removed
     dataset_host             => hiera("th_dataset_host"),
@@ -93,7 +93,7 @@ node /th-cookbooks-\d+\.template\.openstack\.org$/ {
   class { 'rcbau::turbo_hipster':
     rs_cloud_user            => hiera("th_rackspace_user"),
     rs_cloud_pass            => hiera("th_rackspace_pass"),
-    gearman_server           => 'zuul-test.rcbops.com',
+    gearman_server           => 'zuul.rcbops.com',
     ssh_private_key          => hiera("th_private_ssh_key"),
     plugin                   => 'cookbooks_ci',
   }
