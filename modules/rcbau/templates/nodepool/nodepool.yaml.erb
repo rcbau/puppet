@@ -40,6 +40,18 @@ providers:
         setup: prepare_node_turbo_hipster_db.sh
         username: nodepool
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: th-mysql-debug
+        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
+        min-ram: 2048
+        setup: prepare_node_turbo_hipster_db.sh
+        username: nodepool
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: th-percona-debug
+        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
+        min-ram: 2048
+        setup: prepare_node_turbo_hipster_db.sh
+        username: nodepool
+        private-key: /home/nodepool/.ssh/id_rsa
       - name: th-cookbooks
         base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
         min-ram: 2048
@@ -57,6 +69,18 @@ labels:
   - name: th-percona
     image: th-percona
     min-ready: 30
+    ghost-name: turbo-hipster
+    providers:
+      - name: rax-syd
+  - name: th-mysql-debug
+    image: th-mysql-debug
+    min-ready: 1
+    ghost-name: turbo-hipster
+    providers:
+      - name: rax-syd
+  - name: th-percona-debug
+    image: th-percona-debug
+    min-ready: 1
     ghost-name: turbo-hipster
     providers:
       - name: rax-syd

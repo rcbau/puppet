@@ -15,6 +15,7 @@ class turbo_hipster (
   $rs_cloud_user = "",
   $rs_cloud_pass = "",
   $manage_start_script = true,
+  $shutdown_check = true,
 ) {
 
   include pip
@@ -249,10 +250,12 @@ class turbo_hipster (
     source  => 'puppet:///modules/turbo_hipster/shutdown_TH.sh',
   }
 
-  cron { 'Add TH shutdown check':
-    command => '/etc/turbo-hipster/shutdown_TH.sh',
-    user    => 'root',
-    minute  => '*/5',
-    require => File['/etc/turbo-hipster/shutdown_TH.sh'],
+  if ($shutdown_check) {
+    cron { 'Add TH shutdown check':
+      command => '/etc/turbo-hipster/shutdown_TH.sh',
+      user    => 'root',
+      minute  => '*/5',
+      require => File['/etc/turbo-hipster/shutdown_TH.sh'],
+    }
   }
 }

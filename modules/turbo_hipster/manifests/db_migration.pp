@@ -17,6 +17,8 @@ class turbo_hipster::db_migration (
   $ensure      = 'present',
   $mariadb_version = '5.5',
   $slow_query_log = '/var/log/mysql/slow-queries.log',
+  $shutdown_th = 'true',
+  $debug_str   = '',
 ) {
   define database_engine_repo {
     if $database_engine == 'percona' {
