@@ -17,7 +17,6 @@ providers:
     region-name: 'SYD'
     service-type: 'compute'
     service-name: 'cloudServersOpenStack'
-#    service-name: 'cloudServersRackspace'
     username: '<%= @rackspace_username %>'
     password: '<%= @rackspace_password %>'
     project-id: '<%= @rackspace_project %>'
@@ -52,20 +51,17 @@ labels:
   - name: th-mysql
     image: th-mysql
     min-ready: 30
-#    ready-script: start_TH_service.sh
     ghost-name: turbo-hipster
     providers:
   - name: th-percona
     image: th-percona
     min-ready: 30
-#    ready-script: start_TH_service.sh
     ghost-name: turbo-hipster
     providers:
       - name: rax-syd
   - name: th-cookbooks
     image: th-cookbooks
     min-ready: 1
-#    ready-script: start_TH_service.sh
     ghost-name: turbo-hipster
     providers:
       - name: rax-syd
