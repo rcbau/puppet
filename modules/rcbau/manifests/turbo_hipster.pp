@@ -36,6 +36,9 @@ class rcbau::turbo_hipster (
     "-p tcp --dport 3306 ! -d 172.16.0.1 -j DROP",
     "-p tcp --dport 3306  -d 172.16.0.1 -j ACCEPT",
   ],
+  $shutdown_check = true,
+  $shutdown_th = 'true',
+  $debug_str   = '',
 ) {
   include openstack_project
 
@@ -58,6 +61,8 @@ class rcbau::turbo_hipster (
     rs_cloud_user            => $rs_cloud_user,
     rs_cloud_pass            => $rs_cloud_pass,
     manage_start_script      => $manage_start_script,
+    shutdown_check           => $shutdown_check,
+    debug_str                => $debug_str,
   }
 
   if ($plugin == "db_migration") {
@@ -71,6 +76,7 @@ class rcbau::turbo_hipster (
       database_engine         => $database_engine,
       database_engine_package => $database_engine_package,
       mysql_root_password     => $mysql_root_password,
+      shutdown_th             => $shutdown_th,
     }
   }
 

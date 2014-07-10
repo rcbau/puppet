@@ -1,30 +1,30 @@
 plugins:
     - name: real_db_upgrade
       datasets_dir: /var/lib/turbo-hipster/datasets_devstack_131007
-      function: build:real-db-upgrade_nova_<%= @database_engine %>_devstack_131007:th-<%= @database_engine %>
-      shutdown-th: true
+      function: build:real-db-upgrade_nova_<%= @database_engine %>_devstack_131007:th-<%= @database_engine %><%= @debug_str %>
+      shutdown-th: <%= @shutdown_th %>
 
     - name: real_db_upgrade
       datasets_dir: /var/lib/turbo-hipster/datasets_devstack_150
-      function: build:real-db-upgrade_nova_<%= @database_engine %>_devstack_150:th-<%= @database_engine %>
-      shutdown-th: true
+      function: build:real-db-upgrade_nova_<%= @database_engine %>_devstack_150:th-<%= @database_engine %><%= @debug_str %>
+      shutdown-th: <%= @shutdown_th %>
 
     - name: real_db_upgrade
       datasets_dir: /var/lib/turbo-hipster/datasets_trivial_500
-      function: build:real-db-upgrade_nova_<%= @database_engine %>_trivial_500:th-<%= @database_engine %>
-      shutdown-th: true
+      function: build:real-db-upgrade_nova_<%= @database_engine %>_trivial_500:th-<%= @database_engine %><%= @debug_str %>
+      shutdown-th: <%= @shutdown_th %>
 
     - name: real_db_upgrade
       datasets_dir: /var/lib/turbo-hipster/datasets_trivial_6000
-      function: build:real-db-upgrade_nova_<%= @database_engine %>_trivial_6000:th-<%= @database_engine %>
-      shutdown-th: true
+      function: build:real-db-upgrade_nova_<%= @database_engine %>_trivial_6000:th-<%= @database_engine %><%= @debug_str %>
+      shutdown-th: <%= @shutdown_th %>
 
     - name: real_db_upgrade
       datasets_dir: /var/lib/turbo-hipster/datasets_user_001
-      function: build:real-db-upgrade_nova_<%= @database_engine %>_user_001:th-<%= @database_engine %>
-      shutdown-th: true
+      function: build:real-db-upgrade_nova_<%= @database_engine %>_user_001:th-<%= @database_engine %><%= @debug_str %>
+      shutdown-th: <%= @shutdown_th %>
 
     - name: real_db_upgrade
       datasets_dir: /var/lib/turbo-hipster/datasets_user_002
-      function: build:real-db-upgrade_nova_<%= @database_engine %>_user_002:th-<%= @database_engine %>
-      shutdown-th: true
+      function: build:real-db-upgrade_nova_<%= @database_engine %>_user_002:th-<%= @database_engine %><%= @debug_str %>
+      shutdown-th: <%= @shutdown_th %>

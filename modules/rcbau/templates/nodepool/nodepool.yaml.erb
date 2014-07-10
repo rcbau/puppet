@@ -17,13 +17,12 @@ providers:
     region-name: 'SYD'
     service-type: 'compute'
     service-name: 'cloudServersOpenStack'
-#    service-name: 'cloudServersRackspace'
     username: '<%= @rackspace_username %>'
     password: '<%= @rackspace_password %>'
     project-id: '<%= @rackspace_project %>'
     auth-url: 'https://identity.api.rackspacecloud.com/v2.0/'
     boot-timeout: 220
-    max-servers: 80
+    max-servers: 150
     rate: 0.001
     networks:
       - net-id: 354ba18d-8634-4f56-b5f7-5966ad4b4df9
@@ -41,6 +40,18 @@ providers:
         setup: prepare_node_turbo_hipster_db.sh
         username: nodepool
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: th-mysql-debug
+        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
+        min-ram: 2048
+        setup: prepare_node_turbo_hipster_db.sh
+        username: nodepool
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: th-percona-debug
+        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
+        min-ram: 2048
+        setup: prepare_node_turbo_hipster_db.sh
+        username: nodepool
+        private-key: /home/nodepool/.ssh/id_rsa
       - name: th-cookbooks
         base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
         min-ram: 2048
@@ -51,22 +62,31 @@ providers:
 labels:
   - name: th-mysql
     image: th-mysql
-    min-ready: 5
-#    ready-script: start_TH_service.sh
+    min-ready: 30
     ghost-name: turbo-hipster
     providers:
       - name: rax-syd
   - name: th-percona
     image: th-percona
-    min-ready: 5
-#    ready-script: start_TH_service.sh
+    min-ready: 30
+    ghost-name: turbo-hipster
+    providers:
+      - name: rax-syd
+  - name: th-mysql-debug
+    image: th-mysql-debug
+    min-ready: 1
+    ghost-name: turbo-hipster
+    providers:
+      - name: rax-syd
+  - name: th-percona-debug
+    image: th-percona-debug
+    min-ready: 1
     ghost-name: turbo-hipster
     providers:
       - name: rax-syd
   - name: th-cookbooks
     image: th-cookbooks
     min-ready: 1
-#    ready-script: start_TH_service.sh
     ghost-name: turbo-hipster
     providers:
       - name: rax-syd

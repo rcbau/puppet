@@ -68,6 +68,50 @@ node /th-percona-(\d+\.template|.*\.slave)\.openstack\.org$/ {
   )
 }
 
+node /th-mysql-debug-(\d+\.template|.*\.slave)\.openstack\.org$/ {
+  class { 'rcbau::turbo_hipster':
+    mysql_root_password => hiera('nodepool_mysql_root_password'),
+    rs_cloud_user       => hiera("th_rackspace_user"),
+    rs_cloud_pass       => hiera("th_rackspace_pass"),
+    gearman_server      => 'zuul.rcbops.com',
+    ssh_private_key     => hiera("th_private_ssh_key"),
+    #TODO(mattoliverau) - the following 3 dataset lines can be removed
+    dataset_host        => hiera("th_dataset_host"),
+    dataset_path        => hiera("th_dataset_path"),
+    dataset_user        => hiera("th_dataset_user"),
+    manage_start_script => false,
+    shutdown_check      => false,
+    debug_str           => '-debug',
+  }
+
+  realize (
+    User::Virtual::Localuser['nodepool'],
+  )
+}
+
+node /th-percona-debug-(\d+\.template|.*\.slave)\.openstack\.org$/ {
+  class { 'rcbau::turbo_hipster':
+    mysql_root_password      => hiera('nodepool_mysql_root_password'),
+    database_engine_package  => "percona-server-server",
+    database_engine          => "percona",
+    rs_cloud_user            => hiera("th_rackspace_user"),
+    rs_cloud_pass            => hiera("th_rackspace_pass"),
+    gearman_server           => 'zuul.rcbops.com',
+    ssh_private_key          => hiera("th_private_ssh_key"),
+    #TODO(mattoliverau) - the following 3 dataset lines can be removed
+    dataset_host             => hiera("th_dataset_host"),
+    dataset_path             => hiera("th_dataset_path"),
+    dataset_user             => hiera("th_dataset_user"),
+    manage_start_script      => false,
+    shutdown_check           => false,
+    debug_str           => '-debug',
+  }
+
+  realize (
+    User::Virtual::Localuser['nodepool'],
+  )
+}
+
 node /th-maria-(\d+\.template|.*\.slave)\.openstack\.org$/ {
   class { 'rcbau::turbo_hipster':
     mysql_root_password      => hiera('nodepool_mysql_root_password'),

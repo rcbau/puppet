@@ -90,7 +90,13 @@ projects:
       - real-db-upgrade_nova_mysql_user_002:th-mysql
       - real-db-upgrade_nova_percona_user_002:th-percona
     experimental:
-      - noop
+      # This would probably want to be limited to just the 1 job you want to debug when actually doing the debugging
+      - real-db-upgrade_nova_mysql_devstack_131007:th-mysql-debug
+      - real-db-upgrade_nova_mysql_user_001:th-mysql-debug
+      - real-db-upgrade_nova_percona_devstack_131007:th-percona-debug
+      - real-db-upgrade_nova_percona_user_001:th-percona-debug
+      - real-db-upgrade_nova_mysql_user_002:th-mysql-debug
+      - real-db-upgrade_nova_percona_user_002:th-percona-debug
     silent:
       - real-db-upgrade_nova_mysql_devstack_131007:th-mysql
       - real-db-upgrade_nova_mysql_user_001:th-mysql
