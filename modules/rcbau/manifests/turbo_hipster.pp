@@ -1,8 +1,7 @@
 # == Class: rcbau::turbo_hipster
 #
 class rcbau::turbo_hipster (
-#  $th_repo = 'https://git.openstack.org/stackforge/turbo-hipster',
-  $th_repo = 'https://github.com/matthewoliver/turbo-hipster.git',
+  $th_repo = 'https://git.openstack.org/stackforge/turbo-hipster',
   $th_repo_destination = '/home/th/turbo-hipster',
   $th_dataset_path = "/var/lib/turbo-hipster/",
   $th_user = "th",
