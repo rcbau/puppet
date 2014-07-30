@@ -238,6 +238,7 @@ class turbo_hipster (
   # until we fix the versioning properly
   exec { 'update virtualenv':
     command   => "pip install -U virtualenv pip",
+    require   => Class['pip'],
   }
 
   file { '/etc/sudoers.d/th':
