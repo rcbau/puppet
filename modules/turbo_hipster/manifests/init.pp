@@ -20,19 +20,6 @@ class turbo_hipster (
 
   include pip
 
-  $desired_virtualenv = '1.11.6'
-
-  if (( versioncmp($::virtualenv_version, $desired_virtualenv) < 0 )) {
-    $virtualenv_ensure = $desired_virtualenv
-  } else {
-    $virtualenv_ensure = present
-  }
-  package { 'virtualenv':
-    ensure   => $virtualenv_ensure,
-    provider => pip,
-    require  => Class['pip'],
-  }
-
   user { "$th_user":
     ensure     => present,
     home       => "/home/$th_user",
