@@ -230,9 +230,14 @@ class turbo_hipster (
   }
 
   package { 'virtualenvwrapper':
-    ensure   => present,
-    provider => pip,
-    require  => Class['pip'],
+    ensure => present,
+  }
+
+  # FIXME: This is a horrible hack to get a version of virtualenv >= 1.11
+  # This will run every time but since it's only ran once on slaves it'll do
+  # until we fix the versioning properly
+  exec { 'update virtualenv':
+    command   => "pip install -U virtualenv pip",
   }
 
   file { '/etc/sudoers.d/th':
