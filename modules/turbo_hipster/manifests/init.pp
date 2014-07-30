@@ -230,9 +230,7 @@ class turbo_hipster (
   }
 
   package { 'virtualenvwrapper':
-    ensure   => present,
-    provider => pip,
-    require  => Class['pip'],
+    ensure => present,
   }
 
   file { '/etc/sudoers.d/th':
