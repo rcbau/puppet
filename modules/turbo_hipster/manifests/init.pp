@@ -233,6 +233,13 @@ class turbo_hipster (
     ensure => present,
   }
 
+  # FIXME: This is a horrible hack to get a version of virtualenv >= 1.11
+  # This will run every time but since it's only ran once on slaves it'll do
+  # until we fix the versioning properly
+  exec { 'update virtualenv':
+    command   => "pip install -U virtualenv pip",
+  }
+
   file { '/etc/sudoers.d/th':
     ensure => present,
     mode   => '0440',
