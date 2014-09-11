@@ -52,7 +52,7 @@ pipelines:
         to: "joshua.hesketh@gmail.com, michael.still@rackspace.com"
     success-message: "Experimental database migration testing successful."
     failure-message: "Experimental database migration testing failed either due to migrations unable to be applied correctly or taking too long."
-    footer-message: "To recheck, leave 'recheck migrations' as a comment. More information: https://wiki.openstack.org/wiki/Nova/Turbo-Hipster"
+    footer-message: "To recheck, leave 'recheck migrations' as a comment. More information: https://wiki.openstack.org/wiki/ThirdPartySystems/DB_Datasets_CI"
 
   - name: silent
     manager: IndependentPipelineManager
@@ -72,7 +72,7 @@ pipelines:
         to: "michael.still@rackspace.com"
     success-message: "Silent test passed"
     failure-message: "Silent test failed"
-    footer-message: "To recheck, leave 'recheck migrations' as a comment. More information: https://wiki.openstack.org/wiki/Nova/Turbo-Hipster"
+    footer-message: "To recheck, leave 'recheck migrations' as a comment. More information: https://wiki.openstack.org/wiki/ThirdPartySystems/DB_Datasets_CI"
 
 jobs:
   - name: ^real-db-upgrade_.*$

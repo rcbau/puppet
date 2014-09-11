@@ -1,7 +1,7 @@
 #! /bin/sh
 ### BEGIN INIT INFO
 # Provides: turbo-hipster-worker-server
-# Required-Start: $remote_fs $syslog
+# Required-Start: $remote_fs $syslog mountnfs
 # Required-Stop: $remote_fs $syslog
 # Default-Start: 2 3 4 5
 # Default-Stop: 0 1 6
@@ -12,7 +12,7 @@
 # Do NOT "set -e"
 
 # PATH should only include /usr/* if it runs after the mountnfs.sh script
-PATH=/sbin:/usr/sbin:/bin:/usr/bin
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/sbin
 DESC="turbo-hipster CI Worker Server"
 NAME=turbo-hipster-worker-server
 DAEMON=/usr/local/bin/turbo-hipster
