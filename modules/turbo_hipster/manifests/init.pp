@@ -229,15 +229,12 @@ class turbo_hipster (
     require => File['/etc/turbo-hipster/start_TH_service.sh'],
   }
 
-  package { 'virtualenvwrapper':
-    ensure => present,
-  }
-
   # FIXME: This is a horrible hack to get a version of virtualenv >= 1.11
   # This will run every time but since it's only ran once on slaves it'll do
   # until we fix the versioning properly
-  exec { 'update virtualenv':
-    command   => "pip install -U virtualenv pip",
+  exec { 'update-virtualenv':
+    command   => "pip install -U setuptools virtualenv pip virtualenvwrapper",
+    path      => '/usr/local/bin:/usr/bin:/bin/',
     require   => Class['pip'],
   }
 
